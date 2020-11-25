@@ -1,4 +1,20 @@
+<html>
+<head>
+	<title> test page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
+<script>
+
+var backUrl = 'http://www.payco.com';
+
+var intentURI = [
+           'intent://#Intent',
+           'scheme=benepia',
+           'action=android.intent.action.VIEW',
+           'category=android.intent.category.BROWSABLE',
+           'package=com.sk.benepia',
            'end'
 ].join(';');
 
@@ -74,20 +90,4 @@ function test() {
     <a href="efrsatoken://?rm=1234&re=5678">efamily shop</a>
 <br><br>
     <a href="sms:01028786322&body=smstest">sms Test</a>
-<br><br>
-    <a href="benepia://photoPermission">test photo </a>
-<br><br>
-    <a href="efamilyshop://window_open?url=http://www.jesust.com/test131313.html">window_open</a>
-<br><br>
-<br><br>
-    <a href="efamilyshop://window_open?url=http://www.jesust.com/test131313.html&mType=post&post=%7B%22test%22:%221%22,%22resUrl%22:%22/shop/appTest/openPopup.view%22%7D">window_open post</a>
-<br><br>
-    <a href="efamilyshop://sendmsg?callback=alerttest2&msg=테스트입니다.">sendmsg</a>
-<br><br>
-<br><br>
-
-</body>
-
-
-
-</html>
+<br><br
