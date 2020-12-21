@@ -22,6 +22,11 @@ function androidtest() {
 	window.location.href = intentURI;
 }
 
+function apptest() {
+alert(1);
+	window.location.href = "intent://fpmall?#Intent;scheme=efamilyshopfp;package=com.mns.efamilyshop.fp;end";
+}
+
 function alerttest() {
 	alert("test1");
     alert("test2");
@@ -122,6 +127,8 @@ package=com.mns.efamilyshop.fp;end"> app run</a>
 <br><br>
 <a href="intent://fpmall?#Intent;
 scheme=efamilyshopfp;package=com.mns.efamilyshop.fp;end"> app run!!!</a>
+<br><br>
+<input type="button" id="appMobileToggle" value="app TEST" onclick="apptest();"/>
 <br><br>
 
 </body>
