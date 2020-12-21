@@ -1,1 +1,138 @@
-!DOCTYPE html><html lang="ko"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">    <meta http-equiv="X-UA-Compatible" content="ie=edge">        <script type="text/javascript">    alert(1);    location.href = "intent://fpmall?#Intent;scheme=efamilyshopfp;package=com.mns.efamilyshop.fp;end";    alert(2);    </script></head></html>
+<html>
+<head>
+	<title> test page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>
+
+var backUrl = 'http://www.payco.com';
+
+var intentURI = [
+           'intent://#Intent',
+           'scheme=benepia',
+           'action=android.intent.action.VIEW',
+           'category=android.intent.category.BROWSABLE',
+           'package=com.sk.benepia',
+           'end'
+].join(';');
+
+function androidtest() {
+	window.location.href = intentURI;
+}
+
+function apptest() {
+alert(1);
+	window.location.href = "intent://fpmall?#Intent;scheme=efamilyshopfp;package=com.mns.efamilyshop.fp;end";
+}
+
+function alerttest() {
+	alert("test1");
+    alert("test2");
+}
+
+function alerttest2(str) {
+	alert(str);
+}
+
+function callAutoLogin(a, b, c) {
+	alert(a + b + c);
+
+    window.location.href = "successlogin://?"
+
+}
+
+$(window).ready(function() {
+     
+  var originalSize = $(window).width() + $(window).height();
+
+  //window.location.href = "benepia://keyboard_open"
+
+});
+
+
+$(function(){
+  window.scrollTo(0,1)
+  setTimeout(function(){
+
+    //event.preventDefault();
+    //event.stopPropagation();
+
+    $('#input_text').first().click().focus();
+//  $('#input_text').setSelectionRange(0, 0);
+    //$('#input_text.form-control.first-responder').first().focus();
+
+  },1000);
+  
+});
+
+
+function test() {
+    
+    alert("check");
+    $('#input_text').click().focus();
+       
+}
+
+</script>
+
+<!--<iframe src="https://m.okcashbag.com/clause/cardService.mocb" width="100%" height="100%" title="OCB Service"></iframe>-->
+
+<body>
+    <input type="text" name="input_text" id="input_text" />
+    <input type="button" id="searchMobileToggle" value="TEST" onclick="test();"/>
+<br>
+    <a href="benepia://window_open?url=http://www.jesust.com/test131313.html&popType=popup&navType=native&mType=get&yPos=center&charset=UTF-8">test ios</a>
+<br><br>
+	<a href="javascript:webkit.messageHandlers.reqPayment.postMessage(null);">test2 ios</a>
+<br><br>
+    <a href="benepia://go_branddetail?brandId=10000008&bizcoId=207235793&barcodeYn=Y">test go_brand_barcode</a>
+<br><br>
+<br><br>
+    <a href="benepia://window_open?url=%2FeCoupon%2FocbServiceAgree.bene&popType=push&navType=native&mType=get&charset=UTF-8&post=%7B%22closebtn%22%3A%22N%22%7D">ocb test</a>
+<br><br>
+    <a href="efrsatoken://?rm=1234&re=5678">efamily shop</a>
+<br><br>
+    <a href="sms:01028786322&body=smstest">sms Test</a>
+<br><br>
+    <a href="benepia://photoPermission">test photo </a>
+<br><br>
+    <a href="efamilyshop://window_open?url=http://www.jesust.com/test131313.html">window_open</a>
+<br><br>
+
+    <a href="efamilyshop://sendmsg?callback=alerttest2&msg=테스트입니다.">sendmsg</a>
+<br><br>
+<br><br>
+
+    <a href="efamilyshopfp://sso_link?k=7FnXUP9UvO7UPyMQBPR1HA%3D%3D&u=Fb0CuhAWwZymGd7PYfFrrQ%3D%3D">sso_link</a>
+<br><br>
+<br><br>
+<a href="efamilyshopfp://kyobofp">app_link</a><br><br>
+<a href="intent://kyobofp?scheme=efamilyshopfp; action=android.intent.action.VIEW; category=android.intent.category.BROWSABLE; package=com.mns.efamilyshop.fp; end"> 앱호출 </a>
+<br><br>
+<a href="intent://kyobofp?seq=67#Intent;
+scheme=efamilyshopfp;action=android.intent.action.VIEW;
+category=android.intent.category.BROWSABLE;
+package=com.mns.efamilyshop.fp;end"> app run</a>
+<br><br>
+
+<br><br>
+<a href="intent://fpmall?#Intent;
+scheme=efamilyshopfp;action=android.intent.action.VIEW;
+category=android.intent.category.BROWSABLE;
+package=com.mns.efamilyshop.fp;end"> app run</a>
+<br><br>
+
+<br><br>
+<a href="intent://fpmall?#Intent;
+scheme=efamilyshopfp;package=com.mns.efamilyshop.fp;end"> app run!!!</a>
+<br><br>
+<input type="button" id="appMobileToggle" value="app TEST" onclick="apptest();"/>
+<br><br>
+
+</body>
+
+
+
+</html>
