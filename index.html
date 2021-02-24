@@ -2,23 +2,11 @@
 <head>
 	<title> test page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="mobile-web-app-capable" content="yes">
+
 </head>
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 
 <script>
-
-var backUrl = 'http://www.payco.com';
-
-var intentURI = [
-           'intent://#Intent',
-           'scheme=benepia',
-           'action=android.intent.action.VIEW',
-           'category=android.intent.category.BROWSABLE',
-           'package=com.sk.benepia',
-           'end'
-].join(';');
 
 function androidtest() {
 	window.location.href = intentURI;
@@ -46,96 +34,11 @@ function callAutoLogin(a, b, c) {
 }
 
 
-
-function AppWebTypeCheck(){
-		//웹뷰와 브라우저 접근 판단 로직 추가 , Version O: 브라우저 , X: 웹뷰
-		//브라우저
-		if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) || (/Version\//i.test(navigator.userAgent)) ) {
-			return true;
-		//웹뷰
-		}else{
-			return false;
-		}
-	}
-	var type = "applink";
-	var linkUrl = "/main/main.bene";
-	var UserAgent = navigator.userAgent;
-	var AndroidReturnUrl = "intent://gate?returnUrl=/main/main.bene#Intent";
-	var IOSReturnUrl = "benepia://gate?shopId=/main/main.bene";
-	var appStore = "https://itunes.apple.com/kr/app/benepia-benepia/id918784071?l=en=8";
-	var intentURI = [
-        AndroidReturnUrl,
-        'scheme=benepia',
-        'action=android.intent.action.VIEW',
-        'category=android.intent.category.BROWSABLE',
-        'package=com.sk.benepia',
-        //'S.browser_fallback_url=https://m.benepia.co.kr/m.bene',
-        'end'
-    ].join(';');
-	
-	var chromeVersion = "";
-	if(/Chrome[\/\s](\d+\.\d+)/.test(navigator.userAgent)){
-		chromeVersion = new Number(RegExp.$1);
-	};
-	
-	
-		
-		
-			appStore = "https://itunes.apple.com/kr/app/benepia-benepia/id918784071?l=en=8";
-		   	intentURI = [
-               AndroidReturnUrl,
-               'scheme=benepia',
-               'action=android.intent.action.VIEW',
-               'category=android.intent.category.BROWSABLE',
-               'package=com.sk.benepia',
-               //'S.browser_fallback_url=https://m.benepia.co.kr/m.bene',
-               'end'
-           ].join(';');	
-		
-	
-
-
-	var ua = navigator.userAgent;
-    isAndroid = /android/i.test(ua);
-    isIOS = /iphone|ipad|ipod/i.test(ua);
-    var IOSVersion = isIOS ? parseFloat(ua.substr(ua.search(/ipad|iphone/), 30).match(/\d+\_+\d+/)[0].replace('_', '.')) : null;
-    function runApp(appCustomScheme, appStoreAppName){
-		var clickedAt = +new Date;
-		var appCheckTimer = setTimeout(function(){
-			if (+new Date - clickedAt < 2000){
-				window.location.href = appStoreAppName;
-			}
-		}, 100);
-		window.location.href = appCustomScheme;
-	}
-	function checkLoad(){
-	   	//intentURI = "benepia://gate";
-		if(type=="applink"){
-			setTimeout(function() {
-				if(isAndroid){
-					$("#link").attr('href',intentURI);
-				}else{
-					$("#link").attr('href',IOSReturnUrl);	
-				}
-				$("#linkImage").css('opacity', '1');
-				
-				return false;
-			}, 3000);
-			if(isAndroid){
-		   		window.location.href = intentURI;	
-		   	}
-			
-		}
-	}
-
-
-
 $(window).ready(function() {
-     
   var originalSize = $(window).width() + $(window).height();
 
   //window.location.href = "benepia://keyboard_open"
-checkLoad();
+
 
 });
 
@@ -217,6 +120,9 @@ package=com.mns.efamilyshop.fp;end"> app run</a>
 scheme=efamilyshopfp;package=com.mns.efamilyshop.fp;end"> app run!!!</a>
 <br><br>
 <input type="button" id="appMobileToggle" value="app TEST" onclick="apptest();"/>
+<br><br>
+
+<a href="intent://gate?returnUrl=/main/main.bene#Intent;scheme=benepia;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.sk.benepia;end"> app benepia run!!!</a>
 <br><br>
 
 </body>
