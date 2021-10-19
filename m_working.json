@@ -1,7 +1,9 @@
-{
-  "responseCode":"W999",
-  "responseMessage":"responseMessage",
-  "responseData":null,
-  "responseUrl":"http://benework.benepia.co.kr/m/index.html",
-  "additionalMessage":"additionalMessage"
-}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+    <p>This is my page</p>
+  </body>
+</html>
