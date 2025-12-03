@@ -1,14 +1,299 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <script>
-        window.onload = function() {
-            console.log('🎉 onload executed!');
-            alert('onload works!');
-        };
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간편인증 테스트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-pin {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-pin:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-pattern {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-pattern:hover {
+            background-color: #0b7dda;
+        }
+        
+        .btn-bio {
+            background-color: #FF9800;
+            color: white;
+        }
+        
+        .btn-bio:hover {
+            background-color: #e68900;
+        }
+        
+        .log {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log-item {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .clear-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        
+        .clear-btn:hover {
+            background-color: #da190b;
+        }
+    </style>
 </head>
 <body>
-    <h1>Test Page</h1>
+    <div class="container">
+        <h1>🔐 간편인증 테스트</h1>
+        
+        <div class="section">
+            <div class="section-title">useYn = "N" (인증 사용 안함)</div>
+            <button class="btn-pin" onclick="testPinSettingOff()">
+                PIN 설정 (사용 안함)
+            </button>
+            <button class="btn-pattern" onclick="testPatternSettingOff()">
+                패턴 설정 (사용 안함)
+            </button>
+            <button class="btn-bio" onclick="testBioSettingOff()">
+                생체인증 설정 (사용 안함)
+            </button>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">useYn = "Y" (인증 사용)</div>
+            <button class="btn-pin" onclick="testPinSettingOn()">
+                PIN 설정 (사용)
+            </button>
+            <button class="btn-pattern" onclick="testPatternSettingOn()">
+                패턴 설정 (사용)
+            </button>
+            <button class="btn-bio" onclick="testBioSettingOn()">
+                생체인증 설정 (사용)
+            </button>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">setAuthSetting 콜백</div>
+            <button class="btn-pin" onclick="testPinWithCallback()">
+                PIN 설정 (setAuthSetting 콜백)
+            </button>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">로그</div>
+            <div class="log" id="log"></div>
+            <button class="clear-btn" onclick="clearLog()">로그 지우기</button>
+        </div>
+    </div>
+
+    <script>
+        // 로그 출력 함수
+        function addLog(message) {
+            const logDiv = document.getElementById('log');
+            const logItem = document.createElement('div');
+            logItem.className = 'log-item';
+            const timestamp = new Date().toLocaleTimeString();
+            logItem.textContent = `[${timestamp}] ${message}`;
+            logDiv.insertBefore(logItem, logDiv.firstChild);
+        }
+        
+        // 로그 지우기
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+            addLog('로그가 초기화되었습니다.');
+        }
+        
+        // benepia.postMessage 호출 함수
+        function callBenepia(jsonObj) {
+            try {
+                addLog('요청: ' + JSON.stringify(jsonObj, null, 2));
+                
+                if (typeof benepia !== 'undefined' && benepia.postMessage) {
+                    benepia.postMessage(JSON.stringify(jsonObj));
+                    addLog('✅ 성공: benepia.postMessage 호출됨');
+                } else {
+                    addLog('❌ 오류: benepia 객체를 찾을 수 없습니다.');
+                }
+            } catch (e) {
+                addLog('❌ 오류: ' + e.message);
+            }
+        }
+        
+        // PIN 설정 (사용 안함)
+        function testPinSettingOff() {
+            const jsonObj = {
+                action: "pin_setting",
+                params: {
+                    callback: "",
+                    inputType: "check_login",
+                    setPageYn: "N",
+                    autoLoginYn: "N",
+                    useYn: "N"
+                }
+            };
+            callBenepia(jsonObj);
+        }
+        
+        // 패턴 설정 (사용 안함)
+        function testPatternSettingOff() {
+            const jsonObj = {
+                action: "pattern_setting",
+                params: {
+                    callback: "",
+                    inputType: "check_login",
+                    setPageYn: "N",
+                    autoLoginYn: "N",
+                    useYn: "N"
+                }
+            };
+            callBenepia(jsonObj);
+        }
+        
+        // 생체인증 설정 (사용 안함)
+        function testBioSettingOff() {
+            const jsonObj = {
+                action: "bio_setting",
+                params: {
+                    callback: "",
+                    inputType: "check_login",
+                    setPageYn: "N",
+                    autoLoginYn: "N",
+                    useYn: "N"
+                }
+            };
+            callBenepia(jsonObj);
+        }
+        
+        // PIN 설정 (사용)
+        function testPinSettingOn() {
+            const jsonObj = {
+                action: "pin_setting",
+                params: {
+                    callback: "",
+                    inputType: "check_login",
+                    setPageYn: "N",
+                    autoLoginYn: "Y",
+                    useYn: "Y"
+                }
+            };
+            callBenepia(jsonObj);
+        }
+        
+        // 패턴 설정 (사용)
+        function testPatternSettingOn() {
+            const jsonObj = {
+                action: "pattern_setting",
+                params: {
+                    callback: "",
+                    inputType: "check_login",
+                    setPageYn: "N",
+                    autoLoginYn: "Y",
+                    useYn: "Y"
+                }
+            };
+            callBenepia(jsonObj);
+        }
+        
+        // 생체인증 설정 (사용)
+        function testBioSettingOn() {
+            const jsonObj = {
+                action: "bio_setting",
+                params: {
+                    callback: "",
+                    inputType: "check_login",
+                    setPageYn: "N",
+                    autoLoginYn: "Y",
+                    useYn: "Y"
+                }
+            };
+            callBenepia(jsonObj);
+        }
+        
+        // setAuthSetting 콜백 테스트
+        function testPinWithCallback() {
+            const jsonObj = {
+                action: "pin_setting",
+                params: {
+                    callback: "setAuthSetting",
+                    inputType: "check_login",
+                    setPageYn: "N",
+                    autoLoginYn: "Y",
+                    useYn: "Y"
+                }
+            };
+            callBenepia(jsonObj);
+        }
+        
+        // 페이지 로드 시
+        window.onload = function() {
+            addLog('페이지가 로드되었습니다.');
+            if (typeof benepia !== 'undefined') {
+                addLog('✅ benepia 객체가 감지되었습니다.');
+            } else {
+                addLog('⚠️ benepia 객체를 찾을 수 없습니다. (정상 - WebView에서만 작동)');
+            }
+        };
+    </script>
 </body>
 </html>
